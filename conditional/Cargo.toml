@@ -1,0 +1,15 @@
+[package]
+name = "conditional"
+version = "0.1.0"
+authors = ["Alexander Krivács Schrøder <alexschrod@gmail.com>"]
+edition = "2018"
+license = "MIT/Apache-2.0"
+description = "Provides a conditional! macro which lets you use the syntax of the conditional operator (also known as the ternary operator) in Rust"
+repository = "https://github.com/alexschrod/conditional"
+readme = "../README.md"
+keywords = ["conditional", "ternary", "operator"]
+categories = ["rust-patterns"]
+
+[dependencies]
+proc-macro-hack = "^0.5"
+conditional_impl = { path = "../conditional_impl", version = "0.1.0" }
