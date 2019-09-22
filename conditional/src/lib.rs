@@ -18,5 +18,29 @@ use proc_macro_hack::proc_macro_hack;
 /// assert_eq!(x, "hello");
 /// # }
 /// ```
+/// ```
+/// # #[macro_use] extern crate conditional;
+/// #
+/// # fn main() -> Result<(), String> {
+/// let r: Result<i32, String> = Ok(5);
+/// // More complicated expressions are supported, but you might have to use
+/// // parentheses to satisfy the macro parser
+/// let x = conditional!((r? > 42) ? "hello" : "world");
+/// assert_eq!(x, "world");
+/// # Ok(())
+/// # }
+/// ```
+/// ```
+/// # #[macro_use] extern crate conditional;
+/// #
+/// # fn main() -> Result<(), String> {
+/// // More complicated expressions are supported, but you might have to use
+/// // parentheses to satisfy the macro parser
+/// let x = conditional!(("3".parse::<i32>().map_err(|e| e.to_string())? > 42)
+///     ? "hello" : "world");
+/// assert_eq!(x, "world");
+/// # Ok(())
+/// # }
+/// ```
 #[proc_macro_hack]
 pub use conditional_impl::conditional;

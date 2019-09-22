@@ -1,6 +1,6 @@
 [package]
 name = "conditional"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Alexander Krivács Schrøder <alexschrod@gmail.com>"]
 edition = "2018"
 license = "MIT/Apache-2.0"
@@ -12,4 +12,4 @@ categories = ["rust-patterns"]
 
 [dependencies]
 proc-macro-hack = "^0.5"
-conditional_impl = { path = "../conditional_impl", version = "0.1.0" }
+conditional_impl = { path = "../conditional_impl", version = "0.1.1" }
