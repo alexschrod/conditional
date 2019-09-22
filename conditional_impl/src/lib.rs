@@ -15,7 +15,7 @@ use quote::quote;
 use syn::parse::{Parse, ParseStream, Result};
 use syn::{parse_macro_input, Expr, Token};
 
-struct Test {
+struct Conditional {
     condition: Expr,
     r#true: Expr,
     r#false: Expr,
@@ -39,7 +39,7 @@ fn get_until_colon(input: ParseStream) -> Result<Expr> {
     Ok(syn::parse2(skipped_tokens.into_iter().collect())?)
 }
 
-impl Parse for Test {
+impl Parse for Conditional {
     fn parse(input: ParseStream) -> Result<Self> {
         let condition = get_until_question_mark(input)?;
         input.parse::<Token![?]>()?;
@@ -47,7 +47,7 @@ impl Parse for Test {
         input.parse::<Token![:]>()?;
         let r#false: Expr = input.parse()?;
 
-        Ok(Test {
+        Ok(Conditional {
             condition,
             r#true,
             r#false,
@@ -57,11 +57,11 @@ impl Parse for Test {
 
 #[proc_macro_hack]
 pub fn conditional(input: TokenStream) -> TokenStream {
-    let Test {
+    let Conditional {
         condition,
         r#true,
         r#false,
-    } = parse_macro_input!(input as Test);
+    } = parse_macro_input!(input as Conditional);
 
     let result = quote! {
         if #condition {
